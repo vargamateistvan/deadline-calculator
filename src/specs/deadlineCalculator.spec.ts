@@ -16,5 +16,23 @@ describe("calculateDeadline", () => {
     });
   });
 
-  describe("Invalid inputs", () => {});
+  describe("Overlapping", () => {
+    test("should not overlap", () => {
+      const validSubmitDate = new Date("2023-09-28T10:00:00");
+      const result = calculateDeadline(validSubmitDate, 3);
+      expect(result).toEqual(new Date("2023-09-28T13:00:00"));
+    });
+
+    test("should overlap to next day", () => {
+      const validSubmitDate = new Date("2023-09-28T10:00:00");
+      const result = calculateDeadline(validSubmitDate, 13);
+      expect(result).toEqual(new Date("2023-09-29T15:00:00"));
+    });
+
+    test("should overlap to next week", () => {
+      const validSubmitDate = new Date("2023-09-28T10:00:00");
+      const result = calculateDeadline(validSubmitDate, 18);
+      expect(result).toEqual(new Date("2023-10-02T12:00:00"));
+    });
+  });
 });

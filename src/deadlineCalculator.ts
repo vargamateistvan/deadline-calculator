@@ -39,8 +39,11 @@ function getOverlapTime(
   }
 
   // If it weekend
-  if (reportDate.getDay() + turnAroundTime.days > 5) {
-    days += 2;
+  if (
+    reportDate.getDay() + turnAroundTime.days >
+    workingDays[workingDays.length - 1]
+  ) {
+    days += 7 - workingDays.length;
   }
 
   // If remaing hours bigger than workDayHours

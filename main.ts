@@ -25,12 +25,12 @@ console.log(
 );
 
 // Overlap a weekend
-const dueDate3 = calculateDeadline(date1, 50);
+const dueDate3 = calculateDeadline(date1, 18);
 console.log(
   "Starting time:",
   date1.toLocaleString("hu-HU"),
   "estimated hours:",
-  50,
+  18,
   "it will be done at",
   dueDate3.toLocaleString("hu-HU")
 );
