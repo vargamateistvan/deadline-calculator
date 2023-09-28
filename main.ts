@@ -1,4 +1,4 @@
-import calculateDeadline from "./src/deadlineCalculator.js";
+import calculateDeadline from "./src/deadlineCalculator";
 
 console.log("Deadline calculator");
 

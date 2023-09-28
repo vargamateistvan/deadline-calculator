@@ -1,4 +1,4 @@
-import calculateDeadline from "../deadlineCalculator.js";
+import calculateDeadline from "../deadlineCalculator";
 
 describe("calculateDeadline", () => {
   describe("Reporting period", () => {
@@ -15,4 +15,6 @@ describe("calculateDeadline", () => {
       );
     });
   });
+
+  describe("Invalid inputs", () => {});
 });
