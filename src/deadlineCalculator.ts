@@ -1,5 +1,10 @@
 import { workingHours, workingDays } from "./constants";
 
+type TurnaroundTime = {
+  days: number;
+  hours: number;
+};
+
 function isReportingPeriod(reportDate: Date): boolean {
   const submitHour: number = reportDate.getHours();
   const submitDay: number = reportDate.getDay();
@@ -15,10 +20,7 @@ function getWorkingHours(): number {
   return workingHours.end - workingHours.start;
 }
 
-function getTurnaroundTime(turnaround: number): {
-  days: number;
-  hours: number;
-} {
+function getTurnaroundTime(turnaround: number): TurnaroundTime {
   const workDayHours: number = getWorkingHours();
   const days: number = Math.floor(turnaround / workDayHours);
   const hours: number = turnaround % workDayHours;
@@ -28,8 +30,8 @@ function getTurnaroundTime(turnaround: number): {
 
 function getOverlapTime(
   reportDate: Date,
-  turnAroundTime: { days: number; hours: number }
-): { days: number; hours: number } {
+  turnAroundTime: TurnaroundTime
+): TurnaroundTime {
   const workDayHours: number = getWorkingHours();
   let days: number = turnAroundTime.days;
 
@@ -71,9 +73,8 @@ export default function calculateDeadline(
     return dueDate;
   }
 
-  const turnAroundTime: { days: number; hours: number } =
-    getTurnaroundTime(turnaround);
-  const overlapDates: { days: number; hours: number } = getOverlapTime(
+  const turnAroundTime: TurnaroundTime = getTurnaroundTime(turnaround);
+  const overlapDates: TurnaroundTime = getOverlapTime(
     reportDate,
     turnAroundTime
   );
