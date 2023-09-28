@@ -49,7 +49,7 @@ function getOverlapTime(
     days += 7 - workingDays.length;
   }
 
-  // If remaing hours bigger than workDayHours
+  // If remaning hours bigger than workDayHours
   const hours: number =
     (reportDate.getHours() + turnAroundTime.hours - workingHours.start) %
     workDayHours;
