@@ -43,6 +43,7 @@ function getOverlapTime(
     reportDate.getDay() + turnAroundTime.days >
     workingDays[workingDays.length - 1]
   ) {
+    // Add weekend days
     days += 7 - workingDays.length;
   }
 
