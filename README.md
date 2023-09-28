@@ -1,5 +1,17 @@
 # Deadline Calculator
 
+## Install dependencies
+
+```
+yarn
+```
+
+## Run `main.js`
+
+```
+yarn start
+```
+
 ## Run Tests
 
 ```
