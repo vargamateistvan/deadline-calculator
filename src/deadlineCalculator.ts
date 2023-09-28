@@ -61,6 +61,14 @@ export default function calculateDeadline(
   reportDate: Date,
   turnaround: number
 ): Date {
+  if (workingHours.start >= workingHours.end) {
+    throw new Error("Please add a valid workday interval.");
+  }
+
+  if (turnaround < 0) {
+    throw new Error("Estimated time should be bigger than 0.");
+  }
+
   const isValidReportDate: boolean = isReportingPeriod(reportDate);
   if (!isValidReportDate) {
     throw new Error("Invalid reporting time!");

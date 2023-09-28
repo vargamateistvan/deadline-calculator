@@ -1,6 +1,15 @@
 import calculateDeadline from "../deadlineCalculator";
 
 describe("calculateDeadline", () => {
+  describe("Invalid turnaround time", () => {
+    test("should throw an error for an invalid estimated time", () => {
+      const invalidSubmitDate = new Date("2023-09-27T18:00:00");
+      expect(() => calculateDeadline(invalidSubmitDate, -2)).toThrow(
+        "Estimated time should be bigger than 0."
+      );
+    });
+  });
+
   describe("Within Reporting Period", () => {
     test("should calculate due date within the same working day", () => {
       const validSubmitDate = new Date("2023-09-27T10:00:00");
