@@ -4,7 +4,8 @@
   "description": "Deadline calculator",
   "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node -r esm main.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }
