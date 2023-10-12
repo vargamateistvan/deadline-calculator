@@ -6,3 +6,5 @@ export const workingHours = {
   start: 9,
   end: 17,
 };
+
+export const weekLength = 7;

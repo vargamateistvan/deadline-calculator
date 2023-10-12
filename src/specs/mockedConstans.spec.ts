@@ -3,6 +3,7 @@ import calculateDeadline from "../deadlineCalculator";
 jest.mock("../constants", () => ({
   workingDays: [1, 2, 3, 4], // Monday to Thursday
   workingHours: { start: 9, end: 15 },
+  weekLength: 7,
 }));
 
 describe("4 days week with 6 hours workdays", () => {

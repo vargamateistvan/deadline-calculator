@@ -1,4 +1,4 @@
-import { workingHours, workingDays } from "./constants";
+import { workingHours, workingDays, weekLength } from "./constants";
 
 type TurnaroundTime = {
   days: number;
@@ -28,6 +28,35 @@ function getTurnaroundTime(turnaround: number): TurnaroundTime {
   return { days, hours };
 }
 
+function isOverlapsAnotherDay(
+  reportDate: Date,
+  turnAroundTime: TurnaroundTime
+): boolean {
+  return reportDate.getHours() + turnAroundTime.hours >= workingHours.end;
+}
+
+function isWeekEnd(reportDate: Date, turnAroundTime: TurnaroundTime): boolean {
+  return (
+    reportDate.getDay() + turnAroundTime.days >
+    workingDays[workingDays.length - 1]
+  );
+}
+
+function getWeekEndDays(): number {
+  return weekLength - workingDays.length;
+}
+
+function getRemaningHours(
+  reportDate: Date,
+  turnAroundTime: TurnaroundTime,
+  workDayHours: number
+): number {
+  return (
+    (reportDate.getHours() + turnAroundTime.hours - workingHours.start) %
+    workDayHours
+  );
+}
+
 function getOverlapTime(
   reportDate: Date,
   turnAroundTime: TurnaroundTime
@@ -35,24 +64,19 @@ function getOverlapTime(
   const workDayHours: number = getWorkingHours();
   let days: number = turnAroundTime.days;
 
-  // If hours overlaps another day
-  if (reportDate.getHours() + turnAroundTime.hours >= workingHours.end) {
+  if (isOverlapsAnotherDay(reportDate, turnAroundTime)) {
     days++;
   }
 
-  // If it weekend
-  if (
-    reportDate.getDay() + turnAroundTime.days >
-    workingDays[workingDays.length - 1]
-  ) {
-    // Add weekend days
-    days += 7 - workingDays.length;
+  if (isWeekEnd(reportDate, turnAroundTime)) {
+    days += getWeekEndDays();
   }
 
-  // If remaning hours bigger than workDayHours
-  const hours: number =
-    (reportDate.getHours() + turnAroundTime.hours - workingHours.start) %
-    workDayHours;
+  const hours: number = getRemaningHours(
+    reportDate,
+    turnAroundTime,
+    workDayHours
+  );
 
   return { days, hours };
 }
